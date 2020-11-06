@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { IconButton } from "./CustomComponent";
+import { IconButton } from "./react-custom-ui-components/index";
+import IconProvider from './iconsProvider';
 import {useDispatch} from 'react-redux';
 import {addTask} from'./features/taskSlice';
 import CategoryPicker from "./categoryPicker";
@@ -20,12 +21,9 @@ export default function InputController({ imgSrc }) {
 	return (
 		<div className="inputController">
 			<div className="inputController__section">
-				<IconButton
-					className="inputController__calendar"
-					size="small"
-					color="#333333"
-					icon="calendar"
-				/>
+				<IconButton className="inputController__calendar">
+					{IconProvider("calendar")}
+				</IconButton>
 				<form onSubmit={submitData}>
 					<input
 					className="inputController__input"
@@ -34,7 +32,7 @@ export default function InputController({ imgSrc }) {
 					onFocus={() => setIsOpenCategory(false)}
 					type="text"
 					placeholder="Task"
-				/>
+					/>
 				</form>
 			</div>
 			{isOpenCateogry ? (

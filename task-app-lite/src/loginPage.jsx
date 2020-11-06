@@ -1,8 +1,6 @@
 import React from 'react';
 
 export default function LoginPage({dispatch,login}){
-
-
 	return (
 		<div className="loginPage">
 			<img src="./google.svg" alt="google_img"/>

@@ -504,3 +504,10 @@ code {
     left: 0;
     background: #33333390;
 }
+
+
+.taskPage__datePicker{
+    position: absolute;
+    bottom: 10px;
+    left: 60px;
+}
