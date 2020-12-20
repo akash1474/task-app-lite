@@ -12,7 +12,7 @@ export const taskSlice = createSlice({
 			isCompleted: false,
 			isImportant: false,
 			isEvent: false,
-			category: {name:"Tasks",color:"#e8e8e878"},
+			category: {name:"Tasks",color:"rgba( 255, 255, 255, 0.80 )"},
 			id:"asdfasdfasdfasd",
 		}],
 	},

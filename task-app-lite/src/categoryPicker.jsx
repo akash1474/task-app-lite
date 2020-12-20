@@ -24,7 +24,6 @@ export default function CategoryPicker({showCategoryPicker,setCategory}){
 		showCategoryPicker(false);
 	}
 
-
 	return (
 			<div ref={ref} className="categoryPicker">
 				{categories.map(category=><Category key={category.color} onClick={getSlectedCategory} data={category}/>)}

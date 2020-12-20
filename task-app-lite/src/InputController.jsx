@@ -7,13 +7,13 @@ import CategoryPicker from "./categoryPicker";
 export default function InputController({ imgSrc }) {
 	const [text, setText] = useState("");
 	const [isOpenCateogry, setIsOpenCategory] = useState(false);
-	const [category, setCategory] = useState({name:"Task",color:"#e8e8e878"});
+	const [category, setCategory] = useState({name:"Task",color:"rgba(255, 255, 255, 0.8)"});
 
 	const dispatch=useDispatch();
 	function submitData(e){
 		e.preventDefault();
 		setText("");
-		setCategory({name:"Task",color:"#e8e8e878"});
+		setCategory({name:"Task",color:"rgb(239, 239, 239)"});
 		dispatch(addTask({text,category}));
 	}
 

@@ -46,7 +46,7 @@ export default function TasKPage({id,isOpen,setIsOpen}){
 				<textarea placeholder="Task" className="taskPage__input" value={text} onChange={e=>setText(e.target.value)} type="text" />
 				<IconButton onClick={()=>{dispatch(removeTask(currentTask.id));setIsOpen(false);}} className="taskPage__trash" color="#FF3C64">{IconProvider("trash")}</IconButton>
 				<IconButton onClick={()=>setIsOpen(false)} className="taskPage__cross" color="#FF3C64">{IconProvider("cross")}</IconButton>
-				<DropDown getValue={(val)=>{category=val}} title={currentTask.category.name}>
+				<DropDown getValue={(val)=>{category=val}} onChange={(val)=>console.log(val)} title={currentTask.category.name}>
 				{categories.map(category=>(<DropDownItem key={category.color} value={category.name} title={category.name}></DropDownItem>))}
 				</DropDown>
 				<IconButton
@@ -55,7 +55,7 @@ export default function TasKPage({id,isOpen,setIsOpen}){
 					icon="calendar"
 					onClick={()=>setShowCalendar(prev=>!prev)}
 				/>
-				{showCalendar?<Calendar getValue={(val)=>{console.log(val)}} />:null}
+				{showCalendar?<Calendar onChange={(val)=>{console.log(val); setShowCalendar(false);}} getValue={(val)=>{console.log(val)}} />:null}
 				<button className="taskPage__save" onClick={handleSave}>Save</button>
 			</div>
 			</>,document.getElementById('taskPage'));

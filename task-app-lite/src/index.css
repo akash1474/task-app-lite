@@ -1,18 +1,19 @@
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
-        'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+        "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+        "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
-    display: grid;
-    place-items: center;
     height: 100vh;
-    background: linear-gradient(45deg, #ff5355, #ff70b2);
+    /*background: linear-gradient(45deg, #ff5355, #ff70b2);*/
+    background-color: #333;
+    position: relative;
 }
 
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+        monospace;
 }
 
 .loginPage {
@@ -41,7 +42,7 @@ code {
     border-radius: 5px;
     cursor: pointer;
     font-size: 15px;
-    font-family: 'Product Sans Medium';
+    font-family: "Product Sans Medium";
     color: #fff;
 }
 
@@ -58,7 +59,7 @@ code {
     bottom: 0px;
     right: 5px;
     font-size: 13px;
-    font-family: 'Product Sans';
+    font-family: "Product Sans";
 }
 
 * {
@@ -66,6 +67,82 @@ code {
     outline: 0;
     padding: 0;
 }
+
+
+/*/////////////////////////// GRADIENT BACKGROUND /////////////////////////////*/
+
+#root{
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+}
+
+.gradient{
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    top: 0;
+    z-index: -1;
+}
+
+.gradient .circle{
+    border-radius: 50%;
+}
+
+.gradient .square{
+    border-radius: 5px;
+}
+
+.gradient .blue{
+    background-image: linear-gradient(#3B98FF,#5F00FF);
+    height: 40%;
+    width: 40%;
+    transform: rotate(25deg);
+    top: -90px;
+    position: absolute;
+}
+
+.gradient .red{
+    background-image: linear-gradient(#FF745D,#FF3A96);
+    height: 300px;
+    width: 300px;
+    top: 20px;
+    position: absolute;
+    left: 50%;
+}
+
+.gradient .yellow{
+    background-image: linear-gradient(#FDCA00,#FE8700);
+    height: 520px;
+    width: 520px;
+    top: 55%;
+    position: absolute;
+    left: 60%;
+}
+
+.gradient .purple{
+    background-image: linear-gradient(#D839FF,#7A1BFF);
+    height: 250px;
+    width: 350px;
+    top: 70%;
+    position: absolute;
+    left: 10%;
+    transform: rotate(25deg);
+
+}
+
+.gradient .green{
+    background-image: linear-gradient(#CAF875,#26CD11);
+    height: 150px;
+    width: 150px;
+    top: 35%;
+    position: absolute;
+    left: 30%;
+}
+
+
+/*////////////////////////////////////// APP //////////////////////////////////*/
 
 .app {
     height: 500px;
@@ -77,6 +154,14 @@ code {
     align-items: center;
     position: relative;
     padding: 5px;
+        left: 50%;
+    top: 50%;
+    transform:translate(-50%,-50%);
+    background: rgba( 255, 255, 255, 0.25 );
+box-shadow: 0 8px 16px 0 rgba( 31, 38, 135, 0.2 );
+backdrop-filter: blur( 4px );
+-webkit-backdrop-filter: blur( 4px );
+border-radius: 10px;
 }
 
 .header {
@@ -106,8 +191,9 @@ code {
 
 .header__userinfo--email,
 .header__userinfo--name {
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
     font-size: 12px;
+    color: #fff;
 }
 
 .header__userinfo--name {
@@ -129,16 +215,17 @@ code {
 .inputController__input {
     height: 40px;
     padding: 0 5px;
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
     border: none;
     background: transparent;
+    width:200px;
 }
 
 .inputController__section {
     flex: 1;
     display: flex;
     align-items: center;
-    background: #e8e8e8;
+    background: #fffffffc;
     border-radius: 5px;
     margin-right: 5px;
 }
@@ -179,7 +266,6 @@ code {
     position: relative;
     display: flex;
     align-items: center;
-    background: #e8e8e878;
     border-radius: 5px;
     margin: 5px 0px;
     padding: 7px 5px;
@@ -198,7 +284,7 @@ code {
 
 .task__info--title {
     font-size: 13px;
-    font-family: 'Product Sans Black';
+    font-family: "Product Sans Black";
     margin-bottom: 3px;
     cursor: pointer;
 }
@@ -214,7 +300,7 @@ code {
 
 .task__info--sub .sub {
     margin-right: 5px;
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
     font-size: 10px;
 }
 
@@ -255,7 +341,7 @@ code {
 }
 
 .category__name {
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
     color: #fff;
     font-size: 12px;
 }
@@ -272,7 +358,7 @@ code {
 }
 
 /*.category:hover > .category__name {
-	color: #fff;
+    color: #fff;
 }*/
 
 /*///////////////  SETTING CONTAINER    /////////////////////////*/
@@ -391,13 +477,13 @@ code {
 
 .profile__data label {
     font-size: 12px;
-    font-family: 'Product Sans';
+    font-family: "Product Sans";
     color: #ffffff70;
 }
 
 .profile__data label:nth-child(1) {
     font-size: 14px;
-    font-family: 'Product Sans Medium';
+    font-family: "Product Sans Medium";
     color: #fff;
 }
 
@@ -409,13 +495,13 @@ code {
 .profile__tasksCount--title {
     color: #ffffffe6;
     font-size: 12px;
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
     margin-right: 10px;
 }
 
 .profile__tasksCount span {
     color: #fff;
-    font-family: 'Product Sans Black';
+    font-family: "Product Sans Black";
     font-size: 18px;
 }
 
@@ -436,7 +522,7 @@ code {
 .taskPage__input {
     height: 40px;
     padding: 0 5px;
-    font-family: 'Open Sans Black';
+    font-family: "Open Sans Black";
     border: none;
     width: 87%;
     background: transparent;
@@ -451,7 +537,7 @@ code {
 }
 
 .taskPage__title {
-    font-family: 'Product Sans Black';
+    font-family: "Product Sans Black";
     font-size: 15px;
     display: flex;
     align-items: center;
@@ -460,7 +546,7 @@ code {
 }
 .taskPage__title p {
     font-size: 12px;
-    font-family: 'Product Sans';
+    font-family: "Product Sans";
 }
 
 .taskPage__cross {
@@ -484,7 +570,7 @@ code {
     color: #fff;
     border: none;
     border-radius: 5px;
-    font-family: 'Product Sans Medium';
+    font-family: "Product Sans Medium";
     cursor: pointer;
 }
 
@@ -505,8 +591,7 @@ code {
     background: #33333390;
 }
 
-
-.taskPage__datePicker{
+.taskPage__datePicker {
     position: absolute;
     bottom: 10px;
     left: 60px;
