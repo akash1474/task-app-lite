@@ -7,13 +7,19 @@
     flex-direction: column;
     justify-content: center;
     background-color: #424242;
-    z-index: 10000;
+    position: absolute;
+    border-radius: 5px;
+    z-index: 5000;
+}
+
+.calendar>*{
+    font-family: inherit;
 }
 
 .calendar svg{
     height: 1.5rem;
     width:1.5rem;
-    fill: #fff;
+    fill: #558DFF;
     cursor: pointer;
 }
 
@@ -85,4 +91,28 @@
 
 .calendar__daysContainer .invisible{
     cursor: default;
+}
+
+.calendar__status{
+    display: flex;
+    align-items: center;
+    padding: 5px 7px;
+    cursor: pointer;
+    width: 110px;
+    border-radius: 20px;
+    justify-content: center;
+}
+
+.calendar__status:hover{
+    background: rgba(50 113 243,0.3);
+}
+
+.calendar__icon{
+    margin-right: 10px;
+}
+
+.calendar__pickedDate{
+    color: #fff;
+    text-align: center;
+    color: #333;
 }

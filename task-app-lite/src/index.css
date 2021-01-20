@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    font-family:"Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
         "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
         "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -75,6 +75,7 @@ code {
     position: absolute;
     height: 100vh;
     width: 100%;
+    background:#e6e6e6;
 }
 
 .gradient{
@@ -148,20 +149,20 @@ code {
     height: 500px;
     width: 300px;
     border-radius: 5px;
-    background: #fff;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
     padding: 5px;
-        left: 50%;
+    left: 50%;
     top: 50%;
     transform:translate(-50%,-50%);
-    background: rgba( 255, 255, 255, 0.25 );
-box-shadow: 0 8px 16px 0 rgba( 31, 38, 135, 0.2 );
-backdrop-filter: blur( 4px );
--webkit-backdrop-filter: blur( 4px );
-border-radius: 10px;
+    background: rgba( 255, 255, 255);
+    /*box-shadow: 0 8px 16px 0 rgba( 31, 38, 135, 0.2 );*/
+    border:1.0px solid rgb(204 204 204);
+    /*backdrop-filter: blur( 4px );*/
+    /*-webkit-backdrop-filter: blur( 4px );*/
+    border-radius: 10px;
 }
 
 .header {
@@ -182,6 +183,24 @@ border-radius: 10px;
     justify-self: flex-start;
 }
 
+.header__photo{
+    height:35px;
+    width:35px;
+    border-radius: 50%;
+    margin-left: 5px;
+    cursor: pointer;
+    transition-duration: 0.2s;
+}
+
+.header__photo:hover{
+    opacity: 0.9;
+}
+
+.header__photo:active{
+    opacity: 0.7;
+}
+
+
 .header__userinfo {
     display: flex;
     flex-direction: column;
@@ -191,13 +210,17 @@ border-radius: 10px;
 
 .header__userinfo--email,
 .header__userinfo--name {
-    font-family: "Open Sans";
     font-size: 12px;
-    color: #fff;
+}
+
+.header__userinfo--email{
+    color: #757575;
 }
 
 .header__userinfo--name {
     font-size: 15px;
+    font-family: "Product Sans Medium";
+    color: rgb(0 0 0 / 80%);
 }
 
 .header__settings {
@@ -225,9 +248,14 @@ border-radius: 10px;
     flex: 1;
     display: flex;
     align-items: center;
-    background: #fffffffc;
+    background: #e8e8e8;
     border-radius: 5px;
     margin-right: 5px;
+    transition-duration: 0.35s;
+}
+
+.inputController__section:focus-within{
+    background: #dadada;
 }
 
 .inputController__section form {
@@ -246,6 +274,31 @@ border-radius: 10px;
     width: 100%;
     padding: 0 5px;
     overflow: auto;
+}
+
+.taskContainer__empty{
+    top: 50%;
+    transform: translateY(-50%);
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.taskContainer__text{
+    color: rgba(0,0,0,0.80);
+    font-size: 14px;
+    font-family: "Product Sans Medium";
+}
+
+.taskContainer__suggestion{
+    font-size: 12px;
+    width: 240px;
+    text-align: center;
+    color: #18abab;
 }
 
 .taskContainer::-webkit-scrollbar {
@@ -269,10 +322,20 @@ border-radius: 10px;
     border-radius: 5px;
     margin: 5px 0px;
     padding: 7px 5px;
+    background-color: #f3f3f3;
+}
+
+.category__indicator{
+    height: 100%;
+    width: 4px;
+    border-radius: 0 2px 2px 0;
+    margin-right: 3px;
+    margin-left: -5px;
 }
 
 .task__checkbox {
-    margin-right: 5px;
+    margin-right: 2px;
+    width: 30px;
     cursor: pointer;
 }
 
@@ -284,7 +347,7 @@ border-radius: 10px;
 
 .task__info--title {
     font-size: 13px;
-    font-family: "Product Sans Black";
+    font-family: "Product Sans Medium";
     margin-bottom: 3px;
     cursor: pointer;
 }
@@ -300,12 +363,30 @@ border-radius: 10px;
 
 .task__info--sub .sub {
     margin-right: 5px;
-    font-family: "Open Sans";
     font-size: 10px;
+    font-family: "Fira Code";
+}
+
+.task__info--sub .task__expectedDate{
+    border: 1px solid rgb(0 0 0 / 33%);
+    padding: 2px 5px;
+    box-sizing: border-box;
+    border-radius: 2px;
+}
+
+.task__info--sub .task__category{
+    padding: 2px 5px;
+    color:#fff;
+    text-align: center;
+    border-radius: 2px;
 }
 
 .task__important {
     cursor: pointer;
+}
+
+.task__important svg{
+    fill:#fe8700;
 }
 
 .lottie__star {
@@ -317,15 +398,16 @@ border-radius: 10px;
 .categoryPicker {
     position: absolute;
     min-height: 30px;
-    background: #333;
-    right: -138px;
+    background: #fff;
+    right: -142px;
     bottom: -5px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 5px 8px;
+    padding: 5px 10px;
     border-radius: 5px;
     transition-duration: 350ms;
+    border: 1px solid rgba(0,0,0,0.2);
 }
 
 .category {
@@ -340,10 +422,15 @@ border-radius: 10px;
     border-radius: 5px;
 }
 
+.category:hover > .category__name{
+    color: #333;
+}
+
 .category__name {
-    font-family: "Open Sans";
-    color: #fff;
+    font-family: "Product Sans Medium";
+    color:#565656;
     font-size: 12px;
+    transition-duration: 0.25s;
 }
 
 .category__color {
@@ -354,7 +441,7 @@ border-radius: 10px;
 }
 
 .category:hover {
-    background: #555;
+    background: #eaeaea;
 }
 
 /*.category:hover > .category__name {
@@ -367,7 +454,7 @@ border-radius: 10px;
     height: 75px;
     width: 150px;
     border-radius: 5px;
-    background: #333;
+    background: #fff;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -376,6 +463,7 @@ border-radius: 10px;
     z-index: 1000;
     right: -160px;
     top: -5px;
+    border: 1px solid rgba(0,0,0,0.2);
 }
 
 .settingContainer__theme {
@@ -384,8 +472,9 @@ border-radius: 10px;
 }
 
 .settingContainer__theme--title {
-    font-size: 13px;
-    color: #fff;
+    color: #404040;
+    font-size: 12px;
+    font-family: "Product Sans Medium";
 }
 
 .themeToggler {
@@ -393,7 +482,7 @@ border-radius: 10px;
     width: 32px;
     position: relative;
     margin-left: 10px;
-    background: #888;
+    background: #e6e6e6;
     border-radius: 10px;
     padding: 2px;
     cursor: pointer;
@@ -402,16 +491,16 @@ border-radius: 10px;
 .themeToggler__switch {
     height: 16px;
     width: 16px;
-    background: #333;
+    background: #909090;
     position: absolute;
     border-radius: 50%;
-    left: 2px;
     transition-duration: 350ms;
 }
 
 .settingContainer p {
-    color: #fff;
+    color: #404040;
     font-size: 12px;
+    font-family: "Product Sans Medium";
 }
 
 .settingContainer__google {
@@ -421,18 +510,18 @@ border-radius: 10px;
 }
 
 .settingContainer__logout:hover {
-    background: #666;
+    background: #b2cdff;
 }
 
 .settingContainer__logout:active {
-    background: #777;
+    background: #89b8ff;
 }
 
 .settingContainer__logout {
     display: flex;
     align-items: center;
-    border-radius: 10px;
-    background: #555;
+    border-radius: 4px;
+    background: rgb(0 0 0 / 20%);
     justify-content: center;
     cursor: pointer;
     height: 17px;
@@ -447,7 +536,7 @@ border-radius: 10px;
     height: 75px;
     width: 200px;
     border-radius: 5px;
-    background: #333;
+    background: #fff;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -456,6 +545,7 @@ border-radius: 10px;
     z-index: 1000;
     left: -210px;
     top: -5px;
+    border: 1px solid rgba(0,0,0,0.2);
 }
 
 .profile__info {
@@ -478,13 +568,13 @@ border-radius: 10px;
 .profile__data label {
     font-size: 12px;
     font-family: "Product Sans";
-    color: #ffffff70;
+    color: rgb(119 119 119);
 }
 
 .profile__data label:nth-child(1) {
     font-size: 14px;
     font-family: "Product Sans Medium";
-    color: #fff;
+    color: #333;
 }
 
 .profile__tasksCount {
@@ -493,21 +583,21 @@ border-radius: 10px;
 }
 
 .profile__tasksCount--title {
-    color: #ffffffe6;
-    font-size: 12px;
-    font-family: "Open Sans";
+    color: #5a5a5a;
+    font-size: 13px;
+    font-family: Product Sans Medium;
     margin-right: 10px;
 }
 
 .profile__tasksCount span {
-    color: #fff;
-    font-family: "Product Sans Black";
+    color: #333;
+    font-family: "Product Sans Medium";
     font-size: 18px;
 }
 
 .taskPage {
-    height: 200px;
-    width: 350px;
+    height: 400px;
+    width: 250px;
     background: #fff;
     border-radius: 5px;
     display: flex;
@@ -516,33 +606,48 @@ border-radius: 10px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 10px;
+    padding: 28px;
+    animation:taskPage 0.3s ease-in;
+    animation-fill-mode: forwards;
+    opacity: 0;
+}
+
+@keyframes taskPage{
+    from {
+        opacity: 0;
+    }
+    to{
+        height: 460px;
+        width: 250px;
+        opacity: 1;
+    }
 }
 
 .taskPage__input {
-    height: 40px;
+    height: 30px;
     padding: 0 5px;
-    font-family: "Open Sans Black";
+    font-family: "Open Sans";
     border: none;
-    width: 87%;
-    background: transparent;
+    width: 97%;
+    background: #f7f7f7;
+    font-size: 12px;
     margin-bottom: 10px;
-    font-size: 15px;
+    border-radius: 5px;
     border-bottom: 2px solid transparent;
     transition-duration: 0.35s;
 }
 
 .taskPage__input:focus-within {
-    border-color: #6279e2;
+    background-color: #e8e8e8;
 }
 
 .taskPage__title {
-    font-family: "Product Sans Black";
+    font-family: "Product Sans Medium";
     font-size: 15px;
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
-    color: #555;
+    margin-bottom: 20px;
+    color: #2b2b2b;
 }
 .taskPage__title p {
     font-size: 12px;
@@ -551,8 +656,8 @@ border-radius: 10px;
 
 .taskPage__cross {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 17px;
+    right: 13px;
 }
 
 .taskPage__trash {
@@ -566,10 +671,9 @@ border-radius: 10px;
     position: absolute;
     right: 10px;
     bottom: 10px;
-    background: #6279e2;
-    color: #fff;
+    color: #333;
     border: none;
-    border-radius: 5px;
+    border-radius: 3px;
     font-family: "Product Sans Medium";
     cursor: pointer;
 }
@@ -588,7 +692,18 @@ border-radius: 10px;
     width: 100%;
     top: 0;
     left: 0;
-    background: #33333390;
+    animation: showOverlay 0.25s linear;
+    animation-fill-mode: forwards;
+    background: rgba(0,0,0,0);
+}
+
+@keyframes showOverlay{
+    from {
+        background: rgba(0,0,0,0);
+    }
+    to{
+        background: #33333354;
+    }
 }
 
 .taskPage__datePicker {

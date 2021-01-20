@@ -65,7 +65,6 @@ var IconButton = function (_a) {
     if (!label && labelPosition) {
         throw new Error("IconButton must have a 'label' property for using 'labelPosition'!!!!");
     }
-    console.log(color);
     var useStyles = createUseStyles({
         iconButton__ripple: {
             backgroundColor: (color ? color : types[type]) + "3d",
