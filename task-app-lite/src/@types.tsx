@@ -7,6 +7,7 @@ export interface Task{
 	isEvent: boolean,
 	category:Category,
 	id:string,
+	description:string,
 }
 
 export interface Category{

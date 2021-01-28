@@ -4,7 +4,7 @@ import { selectTask ,updateList} from "./features/taskSlice";
 import Task from "./Task";
 import { ReactSortable } from "react-sortablejs";
 import { Task as TaskInterface } from './@types';
-import TaskImage from './todo-small.png';
+import TaskImage from './assets/img/todo-small.png';
 export default function TaskContainer() {
 	const taskInfo = useSelector(selectTask);
 	const dispatch = useDispatch();

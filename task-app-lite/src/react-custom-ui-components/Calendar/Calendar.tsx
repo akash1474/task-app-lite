@@ -168,15 +168,18 @@ const Calendar: React.FC<Props> = ({ onChange, showRelativeDate, showDate, float
     function getPosition(float: string | undefined) {
         if (float === "top") {
             return {
-                transform: "translateY(-180px)"
+                transform: "translateY(-180px)",
+                transformOrigin:"bottom center",
             }
         } else if (float === "right") {
             return {
-                transform: "translate(50px,-130px)"
+                transform: "translate(50px,-130px)",
+                transformOrigin: "bottom left",
             }
         } else if (float === "left") {
             return {
-                transform: "translate(-320px,-122px)"
+                transform: "translate(-320px,-122px)",
+                transformOrigin: "bottom right",
             }
         } else {
             return {}

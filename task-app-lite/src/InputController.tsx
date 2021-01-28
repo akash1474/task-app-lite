@@ -29,7 +29,6 @@ const InputController: React.FC<Props> = ({ imgSrc }) => {
 			<div className="inputController__section">
 				<Calendar
 					float="left"
-					
 					onChange={(val: Date) => {
 						selectedDate = val.getTime();
 					}}

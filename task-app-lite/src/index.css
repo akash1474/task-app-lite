@@ -408,6 +408,19 @@ code {
     border-radius: 5px;
     transition-duration: 350ms;
     border: 1px solid rgba(0,0,0,0.2);
+    animation: visibleanime 0.25s cubic-bezier(0.09, 0.49, 0.39, 1.44);
+    animation-fill-mode: forwards;
+    transform-origin: bottom left;
+}
+
+@keyframes visibleanime{
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }to{
+        opacity: 1;
+        transform: scale(1.0);
+    }
 }
 
 .category {
@@ -464,6 +477,9 @@ code {
     right: -160px;
     top: -5px;
     border: 1px solid rgba(0,0,0,0.2);
+    animation: visibleanime 0.25s cubic-bezier(0.09, 0.49, 0.39, 1.44);
+    animation-fill-mode: forwards;
+    transform-origin: center left;
 }
 
 .settingContainer__theme {
@@ -546,6 +562,9 @@ code {
     left: -210px;
     top: -5px;
     border: 1px solid rgba(0,0,0,0.2);
+    animation: visibleanime 0.25s cubic-bezier(0.09, 0.49, 0.39, 1.44);
+    animation-fill-mode: forwards;
+    transform-origin: center right;
 }
 
 .profile__info {
@@ -596,7 +615,7 @@ code {
 }
 
 .taskPage {
-    height: 400px;
+    height: 460px;
     width: 250px;
     background: #fff;
     border-radius: 5px;
@@ -607,7 +626,7 @@ code {
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 28px;
-    animation:taskPage 0.3s ease-in;
+    animation:taskPage 0.3s cubic-bezier(0.09, 0.49, 0.39, 1.44);
     animation-fill-mode: forwards;
     opacity: 0;
 }
@@ -615,13 +634,14 @@ code {
 @keyframes taskPage{
     from {
         opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
     }
     to{
-        height: 460px;
-        width: 250px;
+        transform: translate(-50%, -50%) scale(1.0);
         opacity: 1;
     }
 }
+
 
 .taskPage__input {
     height: 30px;
@@ -631,9 +651,8 @@ code {
     width: 97%;
     background: #f7f7f7;
     font-size: 12px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     border-radius: 5px;
-    border-bottom: 2px solid transparent;
     transition-duration: 0.35s;
 }
 
@@ -652,6 +671,38 @@ code {
 .taskPage__title p {
     font-size: 12px;
     font-family: "Product Sans";
+}
+
+.taskPage__description{
+    max-width: 97%;
+    min-width: 97%;
+    background: #f7f7f7;
+    border: none;
+    margin-top: 15px;
+    border-radius: 3px;
+    font-family: "Open Sans";
+    font-size: 12px;
+    padding: 5px;
+    transition-duration: 0.1s;
+    max-height: 150px;
+    min-height: 15px;
+}
+
+.taskPage__description::-webkit-scrollbar {
+    width: 5px;
+}
+
+.taskPage__description::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.taskPage__description::-webkit-scrollbar-thumb {
+    background: rgb(170, 170, 170);
+    border-radius: 1px;
+}
+
+.taskPage__description:focus-within{
+    background-color: #e8e8e8;
 }
 
 .taskPage__cross {

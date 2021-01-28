@@ -8,7 +8,6 @@ import { login, selectUser } from './features/userSlice';
 export default function App() {
 	const user = useSelector(selectUser);
 	const dispatch = useDispatch();
-
 	return (
 		<div style={user ? {} : { height: 200 }} className="app">
 			{

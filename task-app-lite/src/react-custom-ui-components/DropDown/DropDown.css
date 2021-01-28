@@ -1,21 +1,24 @@
 .dropDown {
-    height: 30px;
-    width: 150px;
-    background: transparent;
-    border-radius: 5px;
-    border: 2px solid #6279e2;
+    height: 25px;
+    width:fit-content;
+    border-radius: 3px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     position: relative;
+    transition-duration: 0.25s;
+}
+
+.dropDown:hover{
+    background: #ececec;
 }
 
 .dropDown .main {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 83%;
+    width: fit-content;
     padding: 10px 5px;
     cursor: pointer;
 }
@@ -32,34 +35,53 @@
 
 .dropDown__body {
     height: fit-content;
-    padding: 3px 5px;
-    width: 95%;
-    border-radius: 5px;
+    padding: 3px;
+    width:fit-content;
+    border-radius: 3px;
     display: flex;
     flex-direction: column;
     position: absolute;
     top: 115%;
-    background: #333;
+    background: #fdfdfd;
     transition-duration: 0.25s;
     z-index: 50;
+    border: 1px solid rgba(0,0,0,0.2);
+    animation:dropDown 0.25s cubic-bezier(0.09, 0.49, 0.39, 1.44);
+    transform-origin: top;
+    animation-fill-mode: forwards;
+}
+
+@keyframes dropDown{
+    from {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    to{
+        transform: scale(1.0);
+        opacity: 1;
+    }
 }
 
 .dropDownItem {
     height: 25px;
-    background: transparent;
     display: flex;
     align-items: center;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 3px;
     margin: 1px 0;
+    padding: 0px 15px 0 9px;
 }
 
 .dropDownItem:hover {
-    background: rgb(119, 119, 119);
+    background: rgb(234 234 234);
+}
+
+.dropDownItem:hover > p{
+    color: #000;
 }
 
 .dropDownItem p {
     font-size: 13px;
-    color: #fff;
-    margin-left: 10px;
+    color: #555;
+    font-family: "Product Sans Medium";
 }

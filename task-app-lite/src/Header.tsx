@@ -4,7 +4,7 @@ import { IconButton } from "./react-custom-ui-components/index";
 import SettingContainer from "./settingContainer";
 import IconProvider from "./iconsProvider";
 import { User } from "./@types";
-import profilePhoto from "./profilePhoto.jpg";
+import profilePhoto from "./assets/img/profilePhoto.jpg";
 interface Props {
 	userData: User;
 }

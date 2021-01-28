@@ -9,7 +9,6 @@ import {
 	DropDownItem,
 } from "./react-custom-ui-components/index";
 
-import Calendar from "./react-custom-ui-components/Calendar/Calendar";
 import Overlay from "./overlay";
 import IconProvider from "./iconsProvider";
 import { Task } from "./@types";
@@ -23,7 +22,6 @@ interface Props {
 const TasKPage: React.FC<Props> = ({ id, isOpen, setIsOpen }) => {
 	const tasks = useSelector(selectTask);
 	const dispatch = useDispatch();
-
 	const currentTask = tasks.find((task: Task) => task.id === id);
 	const [text, setText] = useState(() => {
 		if (id) {
@@ -32,6 +30,8 @@ const TasKPage: React.FC<Props> = ({ id, isOpen, setIsOpen }) => {
 			return null;
 		}
 	});
+
+	const [info, setInfo] = useState<string>(currentTask.description || "");
 	if (!isOpen) return null;
 	let categoryName = currentTask.category.name;
 
@@ -43,9 +43,10 @@ const TasKPage: React.FC<Props> = ({ id, isOpen, setIsOpen }) => {
 			...currentTask,
 			title: text,
 			category: currentCategory,
+			description:info,
 		};
 
-		if(updatedTask.title.length!==0){
+		if (updatedTask.title.length !== 0) {
 			dispatch(editTask(updatedTask));
 		}
 		setIsOpen(false);
@@ -55,9 +56,7 @@ const TasKPage: React.FC<Props> = ({ id, isOpen, setIsOpen }) => {
 		<>
 			<Overlay onClick={() => setIsOpen(false)} />
 			<div className="taskPage">
-				<label className="taskPage__title">
-					Task Infomation
-				</label>
+				<label className="taskPage__title">Task Infomation</label>
 				<input
 					placeholder="Task"
 					className="taskPage__input"
@@ -94,14 +93,15 @@ const TasKPage: React.FC<Props> = ({ id, isOpen, setIsOpen }) => {
 						></DropDownItem>
 					))}
 				</DropDown>
+				<textarea 
+					value={info} 
+					placeholder="Description" 
+					className="taskPage__description"  
+					onChange={(e)=>setInfo(e.target.value)}
+					rows={5}>
+				</textarea>
 				<div className="taskPage__datePicker">
-					<Calendar
-						defaultDate={new Date(currentTask.expectedDate)}
-						float="left"
-						showRelativeDate
-						showDate
-						onChange={(val) => console.log(val)}
-					/>
+					
 				</div>
 				<button className="taskPage__save" onClick={handleSave}>
 					Save
