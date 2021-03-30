@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import ReactDom from "react-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { editTask, removeTask, selectTask } from "./features/taskSlice";
-import { categories } from "./utils";
+import { categories} from "./utils";
 import {
 	IconButton,
 	DropDown,
 	DropDownItem,
+	Calendar,
 } from "./react-custom-ui-components/index";
-
 import Overlay from "./overlay";
 import IconProvider from "./iconsProvider";
 import { Task } from "./@types";
@@ -23,6 +23,7 @@ const TasKPage: React.FC<Props> = ({ id, isOpen, setIsOpen }) => {
 	const tasks = useSelector(selectTask);
 	const dispatch = useDispatch();
 	const currentTask = tasks.find((task: Task) => task.id === id);
+	let selectedDate:number|null=currentTask.expectedDate;
 	const [text, setText] = useState(() => {
 		if (id) {
 			return currentTask.title;
@@ -34,7 +35,6 @@ const TasKPage: React.FC<Props> = ({ id, isOpen, setIsOpen }) => {
 	const [info, setInfo] = useState<string>(currentTask.description || "");
 	if (!isOpen) return null;
 	let categoryName = currentTask.category.name;
-
 	function handleSave() {
 		const currentCategory = categories.find(
 			(el) => el.name === categoryName
@@ -43,7 +43,8 @@ const TasKPage: React.FC<Props> = ({ id, isOpen, setIsOpen }) => {
 			...currentTask,
 			title: text,
 			category: currentCategory,
-			description:info,
+			description: info,
+			expectedDate: selectedDate,
 		};
 
 		if (updatedTask.title.length !== 0) {
@@ -93,15 +94,21 @@ const TasKPage: React.FC<Props> = ({ id, isOpen, setIsOpen }) => {
 						></DropDownItem>
 					))}
 				</DropDown>
-				<textarea 
-					value={info} 
-					placeholder="Description" 
-					className="taskPage__description"  
-					onChange={(e)=>setInfo(e.target.value)}
-					rows={5}>
-				</textarea>
+				<textarea
+					value={info}
+					placeholder="Description"
+					className="taskPage__description"
+					onChange={(e) => setInfo(e.target.value)}
+					rows={5}
+				></textarea>
 				<div className="taskPage__datePicker">
-					
+					<Calendar
+						float="top"
+						showRelativeDate
+						showDate
+						defaultDate={new Date(currentTask.expectedDate)}
+						onChange={(date) => {selectedDate=date.getTime()}}
+					/>
 				</div>
 				<button className="taskPage__save" onClick={handleSave}>
 					Save

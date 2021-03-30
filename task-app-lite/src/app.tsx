@@ -1,18 +1,18 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import HomePage from './homePage';
-import LoginPage from './loginPage';
-import { login, selectUser } from './features/userSlice';
-
+import React from "react";
+import {BrowserRouter,Switch,Route} from 'react-router-dom';
+import HomePage from "./homePage";
+import LoginPage from "./loginPage";
 
 export default function App() {
-	const user = useSelector(selectUser);
-	const dispatch = useDispatch();
+
 	return (
-		<div style={user ? {} : { height: 200 }} className="app">
-			{
-				user ? <HomePage /> : <LoginPage dispatch={dispatch} login={login} />
-			}
+		<div className="app">
+			<BrowserRouter>
+				<Switch>
+					<Route path="/" exact component={HomePage} />
+					<Route path="/auth" exact component={LoginPage} />
+				</Switch>
+			</BrowserRouter>
 		</div>
 	);
 }

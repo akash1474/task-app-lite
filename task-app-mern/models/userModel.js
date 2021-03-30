@@ -6,7 +6,7 @@ const userSchema=new mongoose.Schema({
 		trim: true,
 		required: [true, 'A user must have a name!!!'],
 	},
-	lastname: {
+	familyName: {
 		type: String,
 		trim: true,
 		required: [true, 'A user must have a last name!!!'],
@@ -18,12 +18,16 @@ const userSchema=new mongoose.Schema({
 		required: [true, 'Email is required!!!'],
 		unique: true,
 	},
-	photo: {
+	imageUrl: {
 		type: String,
 	},
 	googleId: {
 		type: String,
 		required: [true, "A user must have a googleId"]
+	},
+	joinedDate:{
+		type:Date,
+		default:new Date().getTime()
 	}
 },{
 	toJSON:{virtuals:true},

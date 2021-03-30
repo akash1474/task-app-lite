@@ -1,5 +1,7 @@
 import React,{useState,useEffect,useRef} from "react";
+import {Link} from 'react-router-dom';
 import {useDispatch} from 'react-redux'
+import axios from 'axios';
 import {logout} from './features/userSlice';
 
 interface Props{
@@ -24,6 +26,11 @@ const SettingContainer:React.FC<Props>=({showSetting})=> {
 		}
 	},[ref,showSetting]);
 
+	const handleLogout=async ()=>{
+		await axios.get("http://localhost:5000/api/v1/user/logout");
+		dispatch(logout())
+	}
+
 	return (
 		<div ref={ref} className="settingContainer">
 			<div className="settingContainer__theme">
@@ -32,10 +39,10 @@ const SettingContainer:React.FC<Props>=({showSetting})=> {
 					<div className="themeToggler__switch" style={{left:isDark?"18px":"2px"}}></div>
 				</div>
 			</div>
-			<div className="settingContainer__logout" onClick={()=>dispatch(logout())}>
-					<img className="settingContainer__google" src="./google.svg" alt="google"/>
-				<p>Logout</p>
-			</div>
+			<Link onClick={handleLogout} className="settingContainer__logout" to="/auth">
+				<img className="settingContainer__google" src="./google.svg" alt="google"/>
+					<p>Logout</p>
+			</Link>
 		</div>
 	);
 }

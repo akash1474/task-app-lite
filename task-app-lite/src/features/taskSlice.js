@@ -29,7 +29,7 @@ import {v4} from 'uuid';
 export const taskSlice = createSlice({
 	name: "task",
 	initialState: {
-		tasks:JSON.parse(localStorage.getItem("tasks")) || {},
+		tasks:JSON.parse(localStorage.getItem("tasks")) || [],
 	},
 	reducers: {
 		loadData:(state,action)=>{

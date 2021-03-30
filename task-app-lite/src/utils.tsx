@@ -37,3 +37,11 @@ export const categories: Category[] = [
 		color: COLORS.yellow,
 	},
 ];
+
+
+export const formatDate=(ms:number)=>{
+	const date = new Date(ms);
+	const month = date.getMonth() + 1;
+	const day = date.getDate();
+	return `${date.getFullYear()}-${month<10?"0"+month:month}-${day<10?'0'+day:day}`;
+}

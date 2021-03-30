@@ -1,6 +1,6 @@
 export interface Task{
 	title: string,
-	expectedDate: Date,
+	expectedDate: number,
 	createdAt: Date,
 	isCompleted: boolean,
 	isImportant: boolean,
@@ -18,7 +18,7 @@ export interface Category{
 export interface User{
 	name: string;
 	email: string;
-	photoURL: string;
+	imageUrl: string;
 	from: string;
 	totalCompleted: number; 
 }

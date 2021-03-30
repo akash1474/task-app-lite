@@ -9,18 +9,18 @@ import moment from 'moment';
 import { IconButton } from './react-custom-ui-components/index';
 import { Task as TaskInterface, Category } from './@types';
 
-interface props {
+interface Props {
 	id: string;
 	title: string;
 	category: Category;
 	isCompleted: boolean;
 	isImportant: boolean;
-	expectedDate: Date;
+	expectedDate: number;
 	createdAt: Date;
 	isEvent: boolean;
 }
 
-const Task: React.FC<props> = ({
+const Task: React.FC<Props> = ({
 	id,
 	title,
 	category,

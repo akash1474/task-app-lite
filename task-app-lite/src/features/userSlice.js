@@ -1,44 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-// interface InitialState {
-// 	userData: User;
-// }
-
-
-// interface UserSlice {
-// 	name: string,
-// 	initialState: InitialState,
-// 	reducers: {
-// 		[prop: string]: () => void
-// 	}
-// }
-
+import moment from 'moment';
 const userSlice = createSlice({
 	name: "user",
 	initialState: {
-		userData: {
-			name: "Akash Pandit",
-			email: "panditakash38@gmail.com",
-			photoURL: "./avatar.svg",
-			from:"Since November 25, 2020",
-			totalCompleted:256
-		},
+		userData: JSON.parse(localStorage.getItem('userData')) || null,
 	},
 	reducers: {
-		login: (state) => {
-			state.userData={
-			name: "Akash Pandit",
-			email: "panditakash38@gmail.com",
-			photoURL: "./avatar.svg",
-			from:"Since November 25, 2020",
-			totalCompleted:256
-		};
+		login: (state,actions) => {
+			const data={
+				...actions.payload,
+				from:"Since "+moment(actions.payload.joinedDate).format('LL'),
+				totalCompleted:207,
+			}
+			state={
+				userData:data
+			}
+			localStorage.setItem('userData',JSON.stringify(data))
+			window.location="/";
 		},
 		logout:(state)=>{
-			state.userData=null;
+			localStorage.removeItem('userData');
+			state=null;
 		}
 	},
 });
+
 
 export const { login ,logout } = userSlice.actions;
 

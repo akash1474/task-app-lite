@@ -2,6 +2,7 @@ import express from 'express';
 import jwt from 'jsonwebtoken';
 import taskRouter from './taskRouter.js';
 const router = new express.Router();
+import User from '../models/userModel.js'
 
 const authCheck=(req,res,next)=>{
 	console.log(req.user);
@@ -11,23 +12,41 @@ const authCheck=(req,res,next)=>{
 	next();
 }
 
-const logout= async(req,res,next)=>{
-	const cookieOpt = {
-		expires: new Date(
-			Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
-		)
-	}
-	const token=jwt.sign({email:"panditakash38@gmail.com"}, process.env.SECRET, {
-		expiresIn:"10h",
-	})
+const login=async(req,res,next)=>{
+	console.log(req.body);
+	console.log(req.cookies);
+	User.findOne({ googleId: req.body.googleId }).then((user) => {
+				if (!user) {
+					console.log('Created');
+					const verifiedUser = {
+						...req.body,
+					};
+					User.create(verifiedUser).then((user) => {
+						res.status(201).json({
+							status:"success",
+							user,
+						})
+					});
+				} else {
+					console.log('User Available');
+					res.status(200).json({
+						status:"success",
+						user,
+					});
+				}
+			});
+	
+}
 
-	console.log(token);
-	req.logout();
-	res.cookie('jwt', token, cookieOpt);
-	res.send("Logged Out");
+const logout= async(req,res,next)=>{
+	res.cookie('jwt', "Logged Out", {
+		expires: new Date(Date.now() + 10 * 1000)
+	});
+	res.json({data:"Logged Out"});
 }
 
 router.use("/:userId/tasks",authCheck,taskRouter);
-router.use("/logout", authCheck, logout);
+router.post("/login", login);
+router.get("/logout", logout);
 
 export default router;

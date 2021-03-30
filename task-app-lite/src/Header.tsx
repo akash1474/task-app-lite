@@ -4,7 +4,6 @@ import { IconButton } from "./react-custom-ui-components/index";
 import SettingContainer from "./settingContainer";
 import IconProvider from "./iconsProvider";
 import { User } from "./@types";
-import profilePhoto from "./assets/img/profilePhoto.jpg";
 interface Props {
 	userData: User;
 }
@@ -14,9 +13,8 @@ const isLoggedIn = true;
 const Header: React.FC<Props> = ({ userData }) => {
 	const [showSetting, setShowSetting] = useState<boolean>(false);
 	const [showInfo, setShowInfo] = useState<boolean>(false);
-
 	const photoStyles = {
-		background: `url(${profilePhoto})`,
+		background: `url(${userData?.imageUrl})`,
 		backgroundPosition: "center",
 		backgroundSize: "cover",
 	};
@@ -42,8 +40,8 @@ const Header: React.FC<Props> = ({ userData }) => {
 			)}
 
 			<div className="header__userinfo">
-				<p className="header__userinfo--name">{userData.name}</p>
-				<p className="header__userinfo--email">{userData.email}</p>
+				<p className="header__userinfo--name">{userData?.name}</p>
+				<p className="header__userinfo--email">{userData?.email}</p>
 			</div>
 			<IconButton
 				onClick={() => setShowSetting((prev) => !prev)}

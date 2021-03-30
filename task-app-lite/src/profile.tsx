@@ -27,14 +27,14 @@ const Profile:React.FC<Props>=({userData,showInfo})=>{
 			<div className="profile__info">
 				<img src="./google.svg" alt="google"/>
 				<div className="profile__data">
-					<label>{userData.name}</label>
-					<label>{userData.from}</label>
+					<label>{userData?.name}</label>
+					<label>{userData?.from}</label>
 				</div>
 			</div>
 			<div className="profile__tasksCount">
 				<p className="profile__tasksCount--title">Total Completed:</p>
 				<CountUp
-					end={userData.totalCompleted}
+					end={userData?.totalCompleted}
 					duration={3}
 					delay={0.3}
 				/>

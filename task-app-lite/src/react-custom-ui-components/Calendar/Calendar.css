@@ -109,15 +109,21 @@
 .calendar__status{
     display: flex;
     align-items: center;
-    padding: 5px 7px;
     cursor: pointer;
-    width: 110px;
-    border-radius: 20px;
+    width: fit-content;
+    border-radius: 3px;
     justify-content: center;
+    padding: 4px;
+    transition-duration: 0.35s;
+    pointer-events: all;
+}
+
+.calendar__status:active{
+    background: #dadada
 }
 
 .calendar__status:hover{
-    background: rgba(50 113 243,0.3);
+    background: #f3f3f3;
 }
 
 .calendar__icon{
@@ -125,7 +131,8 @@
 }
 
 .calendar__pickedDate{
-    color: #fff;
-    text-align: center;
+    text-align: left;
     color: #333;
+    font-family: "Product Sans Medium";
+    font-size: 14px;
 }

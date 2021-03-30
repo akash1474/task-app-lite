@@ -192,7 +192,7 @@ const Calendar: React.FC<Props> = ({ onChange, showRelativeDate, showDate, float
                 <div
                     onClick={() => setIsOpen(prev => !prev)}
                     className="calendar__status">
-                    <Icon fill="#90caf9"  className="calendar__icon" />
+                    <Icon fill="#1ccea0" height={22} width={22}  className="calendar__icon" />
                     <div
                         className="calendar__pickedDate">
                         {generateDateString()}

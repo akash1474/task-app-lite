@@ -32,7 +32,7 @@ code {
     margin-bottom: 10px;
 }
 
-.loginPage button {
+.loginPage a {
     height: 30px;
     width: 120px;
     display: grid;
@@ -44,6 +44,7 @@ code {
     font-size: 15px;
     font-family: "Product Sans Medium";
     color: #fff;
+    text-decoration: none;
 }
 
 .loginPage button:hover {
@@ -75,7 +76,7 @@ code {
     position: absolute;
     height: 100vh;
     width: 100%;
-    background:#e6e6e6;
+    background:linear-gradient(45deg, #aebaff, #b0c7fffa);
 }
 
 .gradient{
@@ -148,7 +149,7 @@ code {
 .app {
     height: 500px;
     width: 300px;
-    border-radius: 5px;
+    border-radius: 7px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -158,11 +159,7 @@ code {
     top: 50%;
     transform:translate(-50%,-50%);
     background: rgba( 255, 255, 255);
-    /*box-shadow: 0 8px 16px 0 rgba( 31, 38, 135, 0.2 );*/
     border:1.0px solid rgb(204 204 204);
-    /*backdrop-filter: blur( 4px );*/
-    /*-webkit-backdrop-filter: blur( 4px );*/
-    border-radius: 10px;
 }
 
 .header {
@@ -285,6 +282,21 @@ code {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.taskContainer__image{
+    animation:grow 0.7s cubic-bezier(0.09, 0.49, 0.39, 1.44) forwards;
+}
+
+@keyframes grow{
+    from{
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    to{
+        opacity: 1;
+        transform:scale(1);
+    }
 }
 
 
@@ -544,6 +556,7 @@ code {
     width: 75px;
     padding: 5px 10px;
     margin-top: 5px;
+    text-decoration: none;
 }
 
 /*///////////////////  PROFILE  ////////////////////*/
@@ -758,7 +771,6 @@ code {
 }
 
 .taskPage__datePicker {
-    position: absolute;
-    bottom: 10px;
-    left: 60px;
+    position: relative;
+    margin-top: 20px;
 }

@@ -62,7 +62,10 @@ app.get(
 	'/auth/google/callback',
 	passport.authenticate('google'),
 	(req, res) => {
-		res.send(req.user);
+		res.status(200).json({
+			status:"success",
+			data:req.user
+		})
 	}
 );
 
