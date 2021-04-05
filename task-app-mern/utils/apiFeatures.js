@@ -15,6 +15,7 @@ export default class APIFeatures {
 			(match) => `$${match}`
 		);
 		this.query.find(JSON.parse(queryStr));
+		return this;
 	}
 
 	sort() {

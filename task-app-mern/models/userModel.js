@@ -1,15 +1,11 @@
 import mongoose from 'mongoose';
 import validator from 'validator';
+import Task from './taskModel.js';
 const userSchema=new mongoose.Schema({
 	name: {
 		type: String,
 		trim: true,
 		required: [true, 'A user must have a name!!!'],
-	},
-	familyName: {
-		type: String,
-		trim: true,
-		required: [true, 'A user must have a last name!!!'],
 	},
 	email: {
 		type: String,
@@ -28,6 +24,12 @@ const userSchema=new mongoose.Schema({
 	joinedDate:{
 		type:Date,
 		default:new Date().getTime()
+	},
+	totalCompleted:Number,
+	settings:{
+		showCompleted:Boolean,
+		bgColor:String,
+		isDark:Boolean,
 	}
 },{
 	toJSON:{virtuals:true},
@@ -39,6 +41,12 @@ userSchema.virtual('tasks', {
 	foreignField: 'userId',
 	localField: '_id',
 });
+
+userSchema.post(/^find/,async function(docs,next){
+	const doc=await Task.find({googleId:this.googleId})
+	docs.totalCompleted=doc.filter((el)=>el.isCompleted===true).length
+	next();
+})
 
 const userModel = mongoose.model('User', userSchema);
 

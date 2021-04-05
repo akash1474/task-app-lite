@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectTask, editTask } from './features/taskSlice';
+import {updateTask} from './api/index';
 import Lottie from 'react-lottie';
 import animationData from './assets/lottieFiles/checkGreen.json';
 import starAnimation from './assets/lottieFiles/star.json';
 import TaskPage from './taskPage';
 import moment from 'moment';
+import {categories} from './utils';
 import { IconButton } from './react-custom-ui-components/index';
-import { Task as TaskInterface, Category } from './@types';
+import { Task as TaskInterface } from './@types';
 
 interface Props {
 	id: string;
 	title: string;
-	category: Category;
+	category: number;
 	isCompleted: boolean;
 	isImportant: boolean;
 	expectedDate: number;
@@ -35,13 +37,17 @@ const Task: React.FC<Props> = ({
 	const tasks = useSelector(selectTask);
 	const dispatch = useDispatch();
 	const currentTask = tasks.find((task: TaskInterface) => task.id === id);
-
+	const currentCategory=categories[category];
 	function changeStateCompleted() {
-		dispatch(editTask({ ...currentTask, isCompleted: !isCompleted }));
+		updateTask(currentTask.userId,currentTask.id,{isCompleted:!isCompleted}).then((task)=>{
+		dispatch(editTask(task.data.data.task));
+		})
 	}
 
 	function changeStateImportant() {
-		dispatch(editTask({ ...currentTask, isImportant: !isImportant }));
+		updateTask(currentTask.userId,currentTask.id,{isImportant:!isImportant}).then((task)=>{
+			dispatch(editTask(task.data.data.task));
+		})
 	}
 
 	const defaultOptions = {
@@ -93,8 +99,8 @@ const Task: React.FC<Props> = ({
 						{title}
 					</div>
 					<div className="task__info--sub">
-						<div style={{backgroundColor:category.color}} className="sub task__category">
-							{category.name}
+						<div style={{backgroundColor:currentCategory.color}} className="sub task__category">
+							{currentCategory.name}
 						</div>
 						<div className="sub task__expectedDate">
 							{moment(expectedDate).format('MMMM DD')}

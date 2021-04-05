@@ -10,12 +10,14 @@ process.on('uncaughtException', (err) => {
     process.exit(1);
 });
 
+const LIVEDB=process.env.DB.replace("<password>","25274123");
+const LDB=process.env.LDB
 mongoose
-    .connect(process.env.DATABASE_LOCAL, {
+    .connect(LDB, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,
-        useFindAndModify: true,
+        useFindAndModify: false,
     })
     .then(() => {
         console.log('Database Connection Successfull!!!');

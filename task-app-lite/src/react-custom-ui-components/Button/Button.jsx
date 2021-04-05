@@ -25,6 +25,7 @@ var Button = function (_a) {
             border: variant === "outlined" ? "2px solid " + selectedColor : "",
             cursor: "pointer",
             borderRadius: 5,
+            width:"fit-content",
             backgroundColor: variant === "contained" ? selectedColor : "",
             "&:hover": {
                 backgroundColor: variant === "contained" ? selectedColor + "c9" : selectedColor + "20",
@@ -34,6 +35,7 @@ var Button = function (_a) {
             },
             "& > svg": {
                 height: iconSize,
+                width:iconSize,
                 fill: variant === "contained" ? "#fff" : selectedColor,
             }
         },

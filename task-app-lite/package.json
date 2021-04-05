@@ -16,6 +16,8 @@
     "@types/uuid": "^8.3.0",
     "axios": "^0.21.1",
     "chartjs": "^0.3.24",
+    "firebase": "^8.3.2",
+    "jwt-decode": "^3.1.2",
     "moment": "^2.29.1",
     "react": "^17.0.1",
     "react-chartjs-2": "^2.11.1",
@@ -57,6 +59,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-router": "^3.0.24",
     "@types/react-router-dom": "^5.1.7"
   }
 }

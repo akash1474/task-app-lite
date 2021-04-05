@@ -5,9 +5,14 @@ export interface Task{
 	isCompleted: boolean,
 	isImportant: boolean,
 	isEvent: boolean,
-	category:Category,
+	category:number,
 	id:string,
 	description:string,
+	imageUrl:{
+		name:string,
+		url:string,
+	},
+	userId:string,
 }
 
 export interface Category{

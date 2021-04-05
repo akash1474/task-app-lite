@@ -1,30 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {v4} from 'uuid';
-// import {Task} from '../@types';
-
-// interface InitialState{
-// 	tasks:Task[]
-// }
-
-
-// interface TaskSlice{
-// 	name:string,
-// 	initialState:InitialState,
-// 	reducers:{
-// 		[prop:string]:()=>void
-// 	}
-// }
-
-// {
-// 	title: "Completed the Task App",
-// 	expectedDate: new Date("2020-10-25").getTime(),
-// 	createdAt: new Date("2020-10-23").getTime(),
-// 	isCompleted: false,
-// 	isImportant: false,
-// 	isEvent: false,
-// 	category: { name: "Task", color: "#5C6BC0" },
-// 	id: "asdfasdfasdfasd",
-// }
 
 export const taskSlice = createSlice({
 	name: "task",
@@ -33,25 +7,24 @@ export const taskSlice = createSlice({
 	},
 	reducers: {
 		loadData:(state,action)=>{
-			state.tasks = [...action.payload.data];
+			if(action.payload.length>0){
+				state.tasks = [...action.payload];
+				localStorage.setItem("tasks", JSON.stringify(state.tasks));
+			}else{
+				localStorage.removeItem('tasks');
+			}
 		},
 		updateList:(state,action)=>{
 			state.tasks = [...action.payload];
 			localStorage.setItem("tasks", JSON.stringify(state.tasks));
 		},
 		addTask: (state, action) => {
-			const newTask={
-				title:action.payload.text,
-				category:action.payload.category,
-				expectedDate: action.payload.expectedDate || new Date().getTime(),
-				createdAt: new Date().getTime(),
-				isCompleted: false,
-				isImportant: false,
-				isEvent: false,
-				id:v4(),
-			}
-			state.tasks=[...state.tasks,newTask];
+			state.tasks=[...state.tasks,action.payload];
 			localStorage.setItem("tasks", JSON.stringify(state.tasks));
+		},
+		clearAllTasks:(state)=>{
+			state.tasks=[];
+			localStorage.removeItem("tasks");
 		},
 		removeTask: (state, action) => {
 			state.tasks = state.tasks.filter(
@@ -74,7 +47,7 @@ export const taskSlice = createSlice({
 	},
 });
 
-export const { addTask,loadData, removeTask ,editTask,updateList} = taskSlice.actions;
+export const { addTask,loadData, removeTask ,editTask,updateList,clearAllTasks} = taskSlice.actions;
 
 export const selectTask = (state) => state.task.tasks;
 

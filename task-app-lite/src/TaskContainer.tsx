@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectTask ,updateList} from "./features/taskSlice";
+import {selectUser} from './features/userSlice';
 import Task from "./Task";
 import { ReactSortable } from "react-sortablejs";
 import { Task as TaskInterface } from './@types';
@@ -8,7 +9,8 @@ import TaskImage from './assets/img/todo-small.png';
 export default function TaskContainer() {
 	const taskInfo = useSelector(selectTask);
 	const dispatch = useDispatch();
-
+	const userSettings=useSelector(selectUser).userSettings;
+	const tasks=userSettings.showCompleted?taskInfo:taskInfo.filter((task:TaskInterface)=>!task.isCompleted)
 	const imageStyle={
 		background:`url(${TaskImage})`,
 		height: "125px",
@@ -30,7 +32,7 @@ export default function TaskContainer() {
 					className="taskContainer"
 				>
 					{
-						taskInfo.map((task: TaskInterface) => (
+						tasks.map((task: TaskInterface) => (
 							<Task key={task.id} {...task} />
 						))
 					}

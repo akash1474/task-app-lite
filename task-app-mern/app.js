@@ -39,11 +39,12 @@ app.use(xss());
 app.use(mongoSanitize());
 app.use(hpp());
 app.use(compression());
+app.disable('etag');
 
 app.use(
 	'/api',
 	rateLimiter({
-		max: 150,
+		max: 2000,
 		windowMs: 60 * 60 * 1000,
 		message: 'Too many requests from the same IP. Try after an hour',
 	})

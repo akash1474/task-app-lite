@@ -1,32 +1,107 @@
-import React, { useState } from 'react';
-import { IconButton } from './react-custom-ui-components/index';
-import Calendar from './react-custom-ui-components/Calendar/Calendar';
-import { useDispatch } from 'react-redux';
-import { addTask } from './features/taskSlice';
-import CategoryPicker from './categoryPicker';
-import { categories } from './utils';
+import React, { useState } from "react";
+import { IconButton } from "./react-custom-ui-components/index";
+import Calendar from "./react-custom-ui-components/Calendar/Calendar";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser } from "./features/userSlice";
+import { addTask, clearAllTasks } from "./features/taskSlice";
+import CategoryPicker from "./categoryPicker";
+import { categories } from "./utils";
+import { createTask } from "./api/index";
 
 interface Props {
 	imgSrc: string;
 }
 
 const InputController: React.FC<Props> = ({ imgSrc }) => {
-	const [text, setText] = useState('');
+	const [text, setText] = useState("");
+	const userId = useSelector(selectUser).userData.id;
 	const [isOpenCateogry, setIsOpenCategory] = useState(false);
 	const [category, setCategory] = useState(categories[0]);
+	const [categoryMode, setCategoryMode] = useState(false);
 	let selectedDate: number;
-
+	const inputContainer = React.useRef(null);
+	const input = React.useRef(null);
 	const dispatch = useDispatch();
+
+	const goToDefault = () => {
+		setText("");
+		setCategory(categories[0]);
+		setCategoryMode(false);
+	};
+
 	function submitData(e: React.FormEvent) {
 		e.preventDefault();
-		setText('');
-		setCategory(categories[0]);
-		dispatch(addTask({ text, category, expectedDate: selectedDate }));
+		if (text.length < 1) return;
+		(inputContainer.current! as HTMLDivElement).style.backgroundColor =
+			"#e8e8e8";
+		if (text.startsWith("$del_all")) {
+			alert("Are you sure you want to delete all tasks?");
+			dispatch(clearAllTasks);
+			goToDefault();
+			return;
+		}
+		const categoryIndex = categories.findIndex(
+			(cat) => cat.name === category.name
+		);
+		let newTask = {
+			title: text,
+			category: categoryIndex,
+			expectedDate: selectedDate || new Date().getTime(),
+			createdAt: new Date().getTime(),
+			isCompleted: false,
+			isImportant: false,
+			isEvent: false,
+		};
+		createTask(userId, newTask).then((task) => {
+			dispatch(addTask(task.data.data.task));
+			goToDefault();
+		});
 	}
+
+	const applySettings = (type: string) => {
+		const cat = categories.findIndex((el) => el.name === type);
+		(inputContainer.current! as HTMLDivElement).style.backgroundColor =
+			categories[cat].color;
+		setCategory(categories[cat]);
+		setText("");
+	};
+
+	const decodeInput = (str: string) => {
+		let value = str;
+		if (value.indexOf("#") >= 0) {
+			setCategoryMode(true);
+			const split = str.split(" ")[0].length > 3;
+			if (split) {
+				switch (value.split(" ")[0]) {
+					case "#pro":
+						applySettings("Programming");
+						value = "";
+						break;
+					case "#task":
+						applySettings("Task");
+						value = "";
+						break;
+					case "#health":
+						applySettings("Health");
+						value = "";
+						break;
+					case "#personal":
+						applySettings("Personal");
+						value = "";
+						break;
+					case "#study":
+						applySettings("Study");
+						value = "";
+						break;
+				}
+			}
+		}
+		setText(value);
+	};
 
 	return (
 		<div className="inputController">
-			<div className="inputController__section">
+			<div className="inputController__section" ref={inputContainer}>
 				<Calendar
 					float="left"
 					onChange={(val: Date) => {
@@ -37,10 +112,11 @@ const InputController: React.FC<Props> = ({ imgSrc }) => {
 					<input
 						className="inputController__input"
 						value={text}
-						onChange={(e) => setText(e.target.value)}
+						ref={input}
+						onChange={(e) => decodeInput(e.target.value)}
 						onFocus={() => setIsOpenCategory(false)}
 						type="text"
-						placeholder="Task"
+						placeholder={categoryMode ? "" : "Task"}
 					/>
 				</form>
 			</div>
@@ -50,8 +126,8 @@ const InputController: React.FC<Props> = ({ imgSrc }) => {
 					showCategoryPicker={setIsOpenCategory}
 				/>
 			) : null}
-			<IconButton 
-			onClick={() => setIsOpenCategory((prev) => !prev)}
+			<IconButton
+				onClick={() => setIsOpenCategory((prev) => !prev)}
 				color="#404040"
 			>
 				<svg viewBox="0 0 24 24">
