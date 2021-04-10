@@ -10,10 +10,10 @@ process.on('uncaughtException', (err) => {
     process.exit(1);
 });
 
-const LIVEDB=process.env.DB.replace("<password>","25274123");
-const LDB=process.env.LDB
+const LIVEDB = process.env.DB.replace('<password>', process.env.PASS);
+const LDB = process.env.LDB;
 mongoose
-    .connect(LDB, {
+    .connect(LIVEDB, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,
