@@ -8,26 +8,25 @@ import InputController from "./InputController";
 import { getTasks } from "./api/index";
 
 export default function HomePage() {
-	const user = useSelector(selectUser);
-	const dispatch = useDispatch();
-	const userSettings = user.userSettings;
-	document.getElementById("root")!.style.background = userSettings.useGradient
-		? `linear-gradient(45deg, ${userSettings!.bgColor}, ${
-				userSettings!.bgColor
-		  }b3)`
-		: userSettings.bgColor!;
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+  const userSettings = user.userSettings;
+  document.getElementById("root")!.style.background = userSettings.useGradient
+    ? `linear-gradient(45deg, ${userSettings!.bgColor}, ${
+        userSettings!.bgColor
+      }b3)`
+    : userSettings.bgColor!;
 
-	React.useEffect(() => {
-		console.log("Loading Data From Server");
-		getTasks(user.userData.id).then((data) => {
-			dispatch(loadData(data.data.doc));
-		});
-	}, [user.userData.id,dispatch]);
-	return (
-		<>
-			<Header userData={user.userData} />
-			<TaskContainer />
-			<InputController imgSrc="./calendar.svg" />
-		</>
-	);
+  React.useEffect(() => {
+    getTasks(user.userData.id).then((data) => {
+      dispatch(loadData(data.data.doc));
+    });
+  }, [user.userData.id, dispatch]);
+  return (
+    <>
+      <Header userData={user.userData} />
+      <TaskContainer />
+      <InputController imgSrc="./calendar.svg" />
+    </>
+  );
 }
