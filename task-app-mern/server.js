@@ -11,14 +11,16 @@ process.on('uncaughtException', (err) => {
 });
 
 const LIVEDB = process.env.DB.replace('<password>', process.env.PASS);
-const LDB = process.env.LDB;
 mongoose
-    .connect(LIVEDB, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useCreateIndex: true,
-        useFindAndModify: false,
-    })
+    .connect(
+        'mongodb+srv://panditakash38:2527412345@cluster0.puqia.mongodb.net/task-app-lite?retryWrites=true&w=majority',
+        {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            useCreateIndex: true,
+            useFindAndModify: false,
+        }
+    )
     .then(() => {
         console.log('Database Connection Successfull!!!');
     })

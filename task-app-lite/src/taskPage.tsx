@@ -16,7 +16,7 @@ import {
   DropDownItem,
   Calendar,
   Button,
-} from "./react-custom-ui-components/index";
+} from "./react-custom-ui-components/main";
 import { ReactComponent as FileIcon } from "./assets/icons/file.svg";
 import Overlay from "./overlay";
 import IconProvider from "./iconsProvider";
@@ -112,10 +112,11 @@ const TasKPage: React.FC<Props> = ({ id, isOpen, setIsOpen }) => {
     }
 
     if (updatedTask.title.length !== 0) {
+      dispatch(editTask(updatedTask));
+      setIsOpen(false);
       API.updateTask(updatedTask.userId, updatedTask.id, updatedTask).then(
         (task) => {
           dispatch(editTask(task.data.data.task));
-          setIsOpen(false);
         }
       );
     }
@@ -248,7 +249,7 @@ const TasKPage: React.FC<Props> = ({ id, isOpen, setIsOpen }) => {
           {categories.map((category, i) => (
             <DropDownItem
               key={category.color}
-              value={i}
+              value={i.toString()}
               title={category.name}
             ></DropDownItem>
           ))}
@@ -262,7 +263,8 @@ const TasKPage: React.FC<Props> = ({ id, isOpen, setIsOpen }) => {
         ></textarea>
         <div className="taskPage__datePicker">
           <Calendar
-            float="top"
+            iconColor="#1ccea0"
+            float="bottom"
             showRelativeDate
             showDate
             defaultDate={new Date(currentTask.expectedDate)}
@@ -318,3 +320,4 @@ const TasKPage: React.FC<Props> = ({ id, isOpen, setIsOpen }) => {
 };
 
 export default TasKPage;
+

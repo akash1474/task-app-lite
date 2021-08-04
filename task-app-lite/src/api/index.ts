@@ -1,5 +1,5 @@
 import axios from 'axios';
-const url = 'http://localhost:5000/api/v1/user';
+const url = 'https://task-app-lite.herokuapp.com/api/v1/user';
 
 const API=axios.create({baseURL:url});
 API.interceptors.request.use(req=>{

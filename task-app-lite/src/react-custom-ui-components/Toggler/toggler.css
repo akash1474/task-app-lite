@@ -1,0 +1,30 @@
+.Toggler {
+    height: 16px;
+    width: 32px;
+    position: relative;
+    margin-left: 10px;
+    background: #e6e6e6;
+    border-radius: 10px;
+    padding: 2px;
+    cursor: pointer;
+}
+
+.Toggler__switch {
+    height: 16px;
+    width: 16px;
+    position: absolute;
+    border-radius: 50%;
+    transition-duration: 350ms;
+}
+
+.TogglerContainer {
+    display: flex;
+    align-items: center;
+    width:fit-content;
+}
+
+.TogglerContainer--title {
+    color: #404040;
+    font-size: 12px;
+    font-family: "Product Sans Medium";
+}

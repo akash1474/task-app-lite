@@ -10,18 +10,18 @@
     position: absolute;
     border-radius: 5px;
     z-index: 5000;
-    animation: calendaranime 0.35s ease-out;
+    animation: calendaranime 0.2s ease-out;
     animation-fill-mode: forwards;
 }
 
 @keyframes calendaranime{
     from {
         opacity: 0;
-        transform: scale(0.7) translate(-320px,-122px);
+        transform: scale(0.5);
     }
     to{
         opacity: 1;
-        transform: scale(0.8) translate(-320px,-122px);
+        transform: scale(0.8);
     }
 }
 
@@ -109,32 +109,26 @@
 .calendar__status{
     display: flex;
     align-items: center;
+    padding: 4px 12px;
     cursor: pointer;
     width: fit-content;
-    border-radius: 5px;
+    border-radius: 3px;
     justify-content: center;
-    padding: 4px;
-    padding-right: 15px;
-    transition-duration: 0.35s;
-    pointer-events: all;
-}
-
-.calendar__status:active{
-    background: #dadada
 }
 
 .calendar__status:hover{
-    background: #f3f3f3;
+    background: #e8e8e8;
 }
 
 .calendar__icon{
     margin-right: 10px;
-    margin-left: 5px;
+    width: 20px;
+    pointer-events: none;
 }
 
 .calendar__pickedDate{
-    text-align: left;
+    text-align: center;
     color: #333;
-    font-family: "Product Sans Medium";
-    font-size: 14px;
+    font-size: 13px;
+    pointer-events: none;
 }

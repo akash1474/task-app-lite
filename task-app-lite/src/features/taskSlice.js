@@ -45,6 +45,23 @@ export const taskSlice = createSlice({
       localStorage.setItem("userData", JSON.stringify(user));
       localStorage.setItem("tasks", JSON.stringify(state.tasks));
     },
+    updateTask: (state, action) => {
+      let index = 0;
+      const remainingTask = state.tasks.filter((task, i) => {
+        if (task?._id2 && task._id2 === action.payload._id2) {
+          index = i;
+        }
+        return task?._id2 !== action.payload._id2;
+      });
+      const payloadtask = action.payload;
+      delete payloadtask._id2;
+      remainingTask.splice(index, 0, payloadtask);
+      state.tasks = [...remainingTask];
+      const user = JSON.parse(localStorage.getItem("userData"));
+      user.totalCompleted = state.tasks.filter((d) => d.isCompleted).length;
+      localStorage.setItem("userData", JSON.stringify(user));
+      localStorage.setItem("tasks", JSON.stringify(state.tasks));
+    },
   },
 });
 
@@ -55,6 +72,7 @@ export const {
   editTask,
   updateList,
   clearAllTasks,
+  updateTask,
 } = taskSlice.actions;
 
 export const selectTask = (state) => state.task.tasks;

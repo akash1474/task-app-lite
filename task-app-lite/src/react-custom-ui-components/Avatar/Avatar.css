@@ -1,0 +1,11 @@
+.Avatar{
+	cursor: pointer;
+	transition-duration: 0.3s;
+	border-radius: 50%;
+	height: 35px;
+	width: 35px;
+}
+
+.Avatar:hover{
+	opacity: 0.9;
+}

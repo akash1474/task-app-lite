@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Profile from "./profile";
-import { IconButton } from "./react-custom-ui-components/index";
+import { IconButton } from "./react-custom-ui-components/main";
 import SettingContainer from "./settingContainer";
 import IconProvider from "./iconsProvider";
 import { User } from "./@types";
