@@ -10,6 +10,7 @@ import moment from "moment";
 import { categories } from "./utils";
 import { IconButton } from "./react-custom-ui-components/main";
 import { Task as TaskInterface } from "./@types";
+import { ReactComponent as SyncIcon} from './assets/icons/spinner2.svg';
 
 interface Props {
   id: string;
@@ -18,6 +19,7 @@ interface Props {
   isCompleted: boolean;
   isImportant: boolean;
   expectedDate: number;
+  sync?:boolean;
 }
 
 const Task: React.FC<Props> = ({
@@ -27,6 +29,7 @@ const Task: React.FC<Props> = ({
   isCompleted,
   isImportant,
   expectedDate,
+  sync,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -39,7 +42,7 @@ const Task: React.FC<Props> = ({
     updateTask(currentTask.userId, currentTask.id, {
       isCompleted: !isCompleted,
     }).then((task) => {
-      dispatch(editTask(task.data.data.task));
+      dispatch(editTask({...task.data.data.task,sync:true}));
     });
   }
 
@@ -48,7 +51,7 @@ const Task: React.FC<Props> = ({
     updateTask(currentTask.userId, currentTask.id, {
       isImportant: !isImportant,
     }).then((task) => {
-      dispatch(editTask(task.data.data.task));
+      dispatch(editTask({...task.data.data.task,sync:true}));
     });
   }
 
@@ -82,13 +85,13 @@ const Task: React.FC<Props> = ({
               width={26}
               options={defaultOptions}
             />
-          ) : (
+          ) : sync ? (
             <IconButton color="#0CB293" customSize={4}>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path d="M12 2C6.4889971 2 2 6.4889971 2 12C2 17.511003 6.4889971 22 12 22C17.511003 22 22 17.511003 22 12C22 6.4889971 17.511003 2 12 2 z M 12 4C16.430123 4 20 7.5698774 20 12C20 16.430123 16.430123 20 12 20C7.5698774 20 4 16.430123 4 12C4 7.5698774 7.5698774 4 12 4 z" />
               </svg>
             </IconButton>
-          )}
+          ):<SyncIcon height={25} width={25}/>}
         </div>
         <div className="task__info">
           <div

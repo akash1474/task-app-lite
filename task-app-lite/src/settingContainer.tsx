@@ -4,7 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import * as API from "./api/index";
 import { logout, syncSettings, selectUser } from "./features/userSlice";
 import Toggler from "./Toggler/Toggler";
+import { ReactComponent as InfoIcon } from "./assets/icons/info1.svg";
 import { auth } from "./firebase.js";
+import AboutPage from "./AboutPage";
 interface Props {
   showSetting: (v: boolean) => void;
 }
@@ -21,6 +23,7 @@ const SettingContainer: React.FC<Props> = ({ showSetting }) => {
   const ref = useRef(null);
   const user = useSelector(selectUser);
   const settings = user.userSettings;
+  const [showAbout, setShowAbout] = React.useState(false);
   const [userSettings, setUserSettings] = useState<StateProps>(settings);
 
   const syncToServer = () => {
@@ -66,45 +69,60 @@ const SettingContainer: React.FC<Props> = ({ showSetting }) => {
   }, [ref, showSetting]);
 
   return (
-    <div ref={ref} className="settingContainer">
-      <Toggler
-        defaultState={userSettings!.showCompleted}
-        title="Show Completed Tasks"
-        margin="0 0 5px 0"
-        onChange={(val) =>
-          setUserSettings((prev) => {
-            return { ...prev, showCompleted: val };
-          })
-        }
-      />
-      <Toggler
-        defaultState={userSettings!.useGradient}
-        title="Gradient"
-        margin="0 0 5px 0"
-        onChange={(val) =>
-          setUserSettings((prev) => {
-            return { ...prev, useGradient: val };
-          })
-        }
-      />
-      <input
-        value={userSettings!.bgColor}
-        type="color"
-        onChange={handleColorUpdate}
-      />
-      <Link
-        to="/auth"
-        onClick={handleLogout}
-        className="settingContainer__logout"
-      >
-        <img
-          className="settingContainer__google"
-          src="./google.svg"
-          alt="google"
+    <>
+      <AboutPage isOpen={showAbout} setIsOpen={setShowAbout} />
+      <div ref={ref} className="settingContainer">
+        <Toggler
+          defaultState={userSettings!.showCompleted}
+          title="Show Completed Tasks"
+          margin="0 0 5px 0"
+          onChange={(val) =>
+            setUserSettings((prev) => {
+              return { ...prev, showCompleted: val };
+            })
+          }
         />
-        <p>Logout</p>
-      </Link>
-    </div>
+        <Toggler
+          defaultState={userSettings!.useGradient}
+          title="Gradient"
+          margin="0 0 5px 0"
+          onChange={(val) =>
+            setUserSettings((prev) => {
+              return { ...prev, useGradient: val };
+            })
+          }
+        />
+        <div className="settingContainer__bgColor">
+          <p>Background Color</p>
+          <input
+            value={userSettings!.bgColor}
+            type="color"
+            onChange={handleColorUpdate}
+          />
+        </div>
+        <div className="settingContainer__utils">
+          <button onClick={()=>{
+              setShowAbout(true);
+              // showSetting(false);
+          }} className="btn__about">
+            <InfoIcon />
+            <p>About</p>
+          </button>
+          <Link
+            to="/auth"
+            onClick={handleLogout}
+            className="settingContainer__logout"
+          >
+            <img
+              className="settingContainer__google"
+              src="./google.svg"
+              alt="google"
+            />
+            <p>Logout</p>
+          </Link>
+        </div>
+      </div>
+    </>
   );
 };
 

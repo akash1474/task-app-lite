@@ -13,6 +13,7 @@ interface ButtonProps {
   fontSize?: number;
   iconSize?: number;
   onClick: () => void;
+  id?:string;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -26,6 +27,7 @@ const Button: React.FC<ButtonProps> = ({
   fontSize = 13,
   iconSize = 20,
   onClick,
+  id,
 }) => {
   //type interface
   interface Types {
@@ -110,6 +112,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <div
       onClick={onClick}
+      id={id}
       className={
         disabled ? `${classes.button} ${classes.disabled}` : classes.button
       }

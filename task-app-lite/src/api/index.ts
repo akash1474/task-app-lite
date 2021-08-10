@@ -11,7 +11,7 @@ API.interceptors.request.use(req=>{
 export const login=(userData:object)=>API.post("/login",userData);
 export const logout=()=>API.get("/logout");
 export const updateSettings=(userId:string,data:object)=>API.patch(`/${userId}/syncSettings`,data);
-export const getTasks=(userId:string)=>API.get(`/${userId}/tasks`);
+export const getTasks=(userId:string)=>API.get(`/${userId}/tasks?limit=50`);
 export const updateTask=(userId:string,taskId:string,data:object)=>API.patch(`/${userId}/tasks/${taskId}`,data);
 export const createTask=(userId:string,data:object)=>API.post(`/${userId}/tasks`,data);
 export const deleteTask=(userId:string,taskId:string)=>API.delete(`/${userId}/tasks/${taskId}`);

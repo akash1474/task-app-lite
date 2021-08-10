@@ -7,6 +7,8 @@
     flex-direction: column;
     justify-content: center;
     background-color: #424242;
+    font-family: "Poppins";
+    font-weight: 600;
     position: absolute;
     border-radius: 5px;
     z-index: 5000;
@@ -109,7 +111,7 @@
 .calendar__status{
     display: flex;
     align-items: center;
-    padding: 4px 12px;
+    padding: 4px 10px;
     cursor: pointer;
     width: fit-content;
     border-radius: 3px;
@@ -131,4 +133,6 @@
     color: #333;
     font-size: 13px;
     pointer-events: none;
+    font-family: "Poppins";
+    font-weight: 600;
 }

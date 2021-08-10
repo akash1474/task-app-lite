@@ -17,7 +17,7 @@ import {
   Calendar,
   Button,
 } from "./react-custom-ui-components/main";
-import { ReactComponent as FileIcon } from "./assets/icons/file.svg";
+import { ReactComponent as FileIcon } from "./assets/icons/file3.svg";
 import Overlay from "./overlay";
 import IconProvider from "./iconsProvider";
 import { Task } from "./@types";
@@ -105,6 +105,7 @@ const TasKPage: React.FC<Props> = ({ id, isOpen, setIsOpen }) => {
       category: category,
       description: info,
       expectedDate: selectedDate,
+      sync:false,
     };
 
     if (imageUrl.name) {
@@ -116,7 +117,7 @@ const TasKPage: React.FC<Props> = ({ id, isOpen, setIsOpen }) => {
       setIsOpen(false);
       API.updateTask(updatedTask.userId, updatedTask.id, updatedTask).then(
         (task) => {
-          dispatch(editTask(task.data.data.task));
+          dispatch(editTask({...task.data.data.task,sync:true}));
         }
       );
     }
@@ -261,7 +262,8 @@ const TasKPage: React.FC<Props> = ({ id, isOpen, setIsOpen }) => {
           onChange={(e) => setInfo(e.target.value)}
           rows={5}
         ></textarea>
-        <div className="taskPage__datePicker">
+        <div className="taskPage__utils">
+          <div className="taskPage__datePicker">
           <Calendar
             iconColor="#1ccea0"
             float="bottom"
@@ -276,10 +278,12 @@ const TasKPage: React.FC<Props> = ({ id, isOpen, setIsOpen }) => {
         <Button
           icon={uploadState.icon}
           title={uploadState.title}
+          id="uploadBtn"
           onClick={() => {
             (uploadElement.current! as HTMLInputElement).click();
           }}
         ></Button>
+        </div>
         <input
           ref={uploadElement}
           onChange={handleUpload}

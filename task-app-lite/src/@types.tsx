@@ -13,6 +13,7 @@ export interface Task {
     url: string;
   };
   userId: string;
+  sync:boolean;
 }
 
 export interface Category {
