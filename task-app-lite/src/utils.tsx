@@ -13,6 +13,7 @@ export const COLORS: ColorsObj = {
   darkBlue: "#b2bfff",
   purple: "#e3b6ff",
   pink: "#ffb6e2",
+  darkPurple: "#9933ff",
 };
 
 export const categories: Category[] = [
@@ -46,4 +47,3 @@ export const formatDate = (ms: number) => {
     day < 10 ? "0" + day : day
   }`;
 };
-

@@ -6,6 +6,7 @@ interface StatsInterface {
   icon: React.ReactNode;
   padding: string;
   color: string;
+  style?: object;
 }
 
 const Stats: React.FC<StatsInterface> = ({
@@ -14,14 +15,16 @@ const Stats: React.FC<StatsInterface> = ({
   value,
   icon,
   color,
+  style,
 }) => {
-  const style = {
+  const styles = {
     padding,
     backgroundColor: color + "20",
     borderRadius: 3,
+    ...style,
   };
   return (
-    <div style={style} className="Stats">
+    <div style={styles} className="Stats">
       {icon}
       <div className="stats__spl">
         <p style={{ color }} className="stats__title">
@@ -34,4 +37,3 @@ const Stats: React.FC<StatsInterface> = ({
 };
 
 export default Stats;
-

@@ -71,7 +71,11 @@ const SettingContainer: React.FC<Props> = ({ showSetting }) => {
   return (
     <>
       <AboutPage isOpen={showAbout} setIsOpen={setShowAbout} />
-      <div ref={ref} className="settingContainer">
+      <div
+        style={{ display: showAbout ? "none" : "block" }}
+        ref={ref}
+        className="settingContainer"
+      >
         <Toggler
           defaultState={userSettings!.showCompleted}
           title="Show Completed Tasks"
@@ -101,10 +105,13 @@ const SettingContainer: React.FC<Props> = ({ showSetting }) => {
           />
         </div>
         <div className="settingContainer__utils">
-          <button onClick={()=>{
+          <button
+            onClick={() => {
               setShowAbout(true);
               // showSetting(false);
-          }} className="btn__about">
+            }}
+            className="btn__about"
+          >
             <InfoIcon />
             <p>About</p>
           </button>
