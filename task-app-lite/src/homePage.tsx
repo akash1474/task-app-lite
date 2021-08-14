@@ -19,12 +19,13 @@ export default function HomePage() {
 
   React.useEffect(() => {
     getTasks(user.userData.id).then((data) => {
-      const dbTasks=data.data.doc.map((el:any)=>{
+      const dbTasks = data.data.doc.map((el: any, i: number) => {
         return {
           ...el,
-          sync:true,
-        }
-      })
+          sync: true,
+          pos: i,
+        };
+      });
       dispatch(loadData(dbTasks));
     });
   }, [user.userData.id, dispatch]);

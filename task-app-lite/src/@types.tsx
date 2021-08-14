@@ -13,7 +13,8 @@ export interface Task {
     url: string;
   };
   userId: string;
-  sync:boolean;
+  sync: boolean;
+  pos: number;
 }
 
 export interface Category {
@@ -28,4 +29,3 @@ export interface User {
   from: string;
   totalCompleted: number;
 }
-

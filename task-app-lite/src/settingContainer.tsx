@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as API from "./api/index";
 import { logout, syncSettings, selectUser } from "./features/userSlice";
 import Toggler from "./Toggler/Toggler";
-import { ReactComponent as InfoIcon } from "./assets/icons/info1.svg";
+import { ReactComponent as InfoIcon } from "./assets/icons/info2.svg";
 import { auth } from "./firebase.js";
 import AboutPage from "./AboutPage";
 interface Props {
@@ -108,11 +108,10 @@ const SettingContainer: React.FC<Props> = ({ showSetting }) => {
           <button
             onClick={() => {
               setShowAbout(true);
-              // showSetting(false);
             }}
             className="btn__about"
           >
-            <InfoIcon />
+            <InfoIcon height={23} width={23} />
             <p>About</p>
           </button>
           <Link

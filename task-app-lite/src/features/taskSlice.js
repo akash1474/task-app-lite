@@ -1,4 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { updateTaskOrder } from "../api/index";
+
+const sortTasks = (tasks, order) => {
+  const sortedTasks = [];
+  order.map((el, i) => {
+    sortedTasks[i] = tasks.filter((t) => t.pos === el)[0];
+  });
+  return sortedTasks;
+};
 
 export const taskSlice = createSlice({
   name: "task",
@@ -8,18 +17,34 @@ export const taskSlice = createSlice({
   reducers: {
     loadData: (state, action) => {
       if (action.payload.length > 0) {
-        state.tasks = [...action.payload];
-        localStorage.setItem("tasks", JSON.stringify(state.tasks));
+        const taskOrder = JSON.parse(localStorage.getItem("taskOrder"));
+        if (taskOrder.length > 0) {
+          const sortedTasks = sortTasks(action.payload, taskOrder);
+          state.tasks = [...sortedTasks];
+          localStorage.setItem("tasks", JSON.stringify(sortedTasks));
+        } else {
+          state.tasks = [...action.payload];
+          localStorage.setItem("tasks", JSON.stringify(action.payload));
+        }
       } else {
         localStorage.removeItem("tasks");
       }
     },
     updateList: (state, action) => {
       state.tasks = [...action.payload];
-      localStorage.setItem("tasks", JSON.stringify(state.tasks));
+      const taskOrder = action.payload.map((el) => {
+        return el.pos;
+      });
+      const id = JSON.parse(localStorage.getItem("userData")).id;
+      updateTaskOrder(id, { taskOrder }).catch((err) => console.log(err));
+      localStorage.setItem("taskOrder", JSON.stringify([...taskOrder]));
+      localStorage.setItem("tasks", JSON.stringify(action.payload));
     },
     addTask: (state, action) => {
-      state.tasks = [action.payload,...state.tasks];
+      state.tasks = [action.payload, ...state.tasks];
+	  const taskOrder = JSON.parse(localStorage.getItem("taskOrder"));
+	  taskOrder.unshift(state.tasks.length)
+	  localStorage.setItem("taskOrder", JSON.stringify([...taskOrder]));
       localStorage.setItem("tasks", JSON.stringify(state.tasks));
     },
     clearAllTasks: (state) => {
@@ -27,7 +52,11 @@ export const taskSlice = createSlice({
       localStorage.removeItem("tasks");
     },
     removeTask: (state, action) => {
+	  const pos=state.tasks.filter(t=>t.id===action.payload).pos;
+	  const taskOrder = JSON.parse(localStorage.getItem("taskOrder"));
+	  taskOrder.splice(taskOrder.indexOf(pos),1)
       state.tasks = state.tasks.filter((task) => task.id !== action.payload);
+	  localStorage.setItem("taskOrder", JSON.stringify([...taskOrder]));
       localStorage.setItem("tasks", JSON.stringify(state.tasks));
     },
     editTask: (state, action) => {

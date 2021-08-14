@@ -8,6 +8,7 @@ import { editTask, removeTask, selectTask } from "./features/taskSlice";
 import { categories } from "./utils";
 import { ReactComponent as Check } from "./assets/icons/check.svg";
 import { ReactComponent as Error } from "./assets/icons/error.svg";
+import { COLORS } from "./utils";
 
 import { ReactComponent as Spinner } from "./assets/icons/spinner.svg";
 import {
@@ -45,6 +46,7 @@ const TasKPage: React.FC<Props> = ({ id, isOpen, setIsOpen }) => {
     icon: <FileIcon />,
   });
   const currentTask = tasks.find((task: Task) => task.id === id);
+  const [duration, setDuration] = useState(currentTask.duration || 0);
   const [imageUrl, setImageUrl] = useState<{
     url: string;
     name: string;
@@ -105,7 +107,8 @@ const TasKPage: React.FC<Props> = ({ id, isOpen, setIsOpen }) => {
       category: category,
       description: info,
       expectedDate: selectedDate,
-      sync:false,
+      sync: false,
+      duration,
     };
 
     if (imageUrl.name) {
@@ -113,11 +116,12 @@ const TasKPage: React.FC<Props> = ({ id, isOpen, setIsOpen }) => {
     }
 
     if (updatedTask.title.length !== 0) {
+      let pos = currentTask.pos;
       dispatch(editTask(updatedTask));
       setIsOpen(false);
       API.updateTask(updatedTask.userId, updatedTask.id, updatedTask).then(
         (task) => {
-          dispatch(editTask({...task.data.data.task,sync:true}));
+          dispatch(editTask({ ...task.data.data.task, sync: true, pos }));
         }
       );
     }
@@ -264,31 +268,57 @@ const TasKPage: React.FC<Props> = ({ id, isOpen, setIsOpen }) => {
         ></textarea>
         <div className="taskPage__utils">
           <div className="taskPage__datePicker">
-          <Calendar
-            iconColor="#1ccea0"
-            float="bottom"
-            showRelativeDate
-            showDate
-            defaultDate={new Date(currentTask.expectedDate)}
-            onChange={(date) => {
-              selectedDate = date.getTime();
+            <Calendar
+              iconColor="#1ccea0"
+              float="bottom"
+              showRelativeDate
+              showDate
+              defaultDate={new Date(currentTask.expectedDate)}
+              onChange={(date) => {
+                selectedDate = date.getTime();
+              }}
+            />
+          </div>
+          <Button
+            icon={uploadState.icon}
+            title={uploadState.title}
+            id="uploadBtn"
+            onClick={() => {
+              (uploadElement.current! as HTMLInputElement).click();
             }}
-          />
-        </div>
-        <Button
-          icon={uploadState.icon}
-          title={uploadState.title}
-          id="uploadBtn"
-          onClick={() => {
-            (uploadElement.current! as HTMLInputElement).click();
-          }}
-        ></Button>
+          ></Button>
         </div>
         <input
           ref={uploadElement}
           onChange={handleUpload}
           type="file"
           style={{ display: "none" }}
+        />
+        <label
+          style={{
+            fontSize: 12,
+            display: "flex",
+            justifyContent: "space-between",
+            fontFamily: "Poppins",
+            fontWeight: 600,
+          }}
+          htmlFor="customRange1"
+          className="form-label"
+        >
+          <p>Duration</p>
+          <p style={{ color: duration > 6 ? COLORS.red : COLORS.default }}>
+            {duration} {duration > 1 ? "Hours" : "Hours"}
+          </p>
+        </label>
+        <input
+          min={0}
+          max={10}
+          step={0.5}
+          onChange={(e) => setDuration(parseFloat(e.target.value))}
+          value={duration}
+          type="range"
+          className="form-range"
+          id="customRange1"
         />
         <div className="taskPage__footer">
           <IconButton
@@ -324,4 +354,3 @@ const TasKPage: React.FC<Props> = ({ id, isOpen, setIsOpen }) => {
 };
 
 export default TasKPage;
-
