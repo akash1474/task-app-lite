@@ -35,6 +35,18 @@ const userSchema = new mongoose.Schema(
             bgColor: String,
             isDark: Boolean,
         },
+		taskOrder:{
+			type:[Number],
+			default:[]
+		},
+		updateList:{
+			type:[String],
+			default:["No info provided by the developer."]
+		},
+		upcomingUpdate:{
+			type:[String],
+			default:["No info provided by the developer."]
+		}
     },
     {
         toJSON: { virtuals: true },

@@ -13,7 +13,7 @@ process.on('uncaughtException', (err) => {
 const LIVEDB = process.env.DB.replace('<password>', process.env.PASS);
 mongoose
     .connect(
-        'mongodb+srv://panditakash38:2527412345@cluster0.puqia.mongodb.net/task-app-lite?retryWrites=true&w=majority',
+        LIVEDB,
         {
             useNewUrlParser: true,
             useUnifiedTopology: true,

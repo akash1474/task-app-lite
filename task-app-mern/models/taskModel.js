@@ -33,14 +33,19 @@ const taskSchema = new mongoose.Schema(
 			type: Boolean,
 			default: false,
 		},
-		isEvent: {
-			type: Boolean,
-			default: false,
-		},
 		category: {
 			type: Number,
 			default: 0,
 		},
+		duration:{
+			type:Number,
+			default:0,
+		},
+		type:{
+			type:String,
+			enum:["event","progress","task","list"],
+			default:"task",
+		}
 	},
 	{
 		toJSON: { virtuals: true },

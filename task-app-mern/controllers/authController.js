@@ -82,3 +82,31 @@ export const protect = catchAsync(async (req, res, next) => {
   req.user = currentUser;
   next();
 });
+
+export const updateTaskOrder = catchAsync(async (req, res, next) => {
+  console.log("updateTaskOrder")
+	console.log(req.body.taskOrder)
+  const user = await User.findByIdAndUpdate(
+    req.params.userId,
+    { taskOrder:req.body.taskOrder},
+    {
+      runValidators: true,
+	  new:true,
+    }
+  );
+  if (!user) return next(new AppError("Invalid Id", 404));
+  res.status(200).json({
+    status: "success",
+    message: "Order Synced",
+    taskOrder: user.taskOrder,
+  });
+});
+
+export const getTaskOrder = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.params.userId);
+  if (!user) return next(new AppError("Invalid Id", 404));
+  res.status(200).json({
+    status: "success",
+    order: user.taskOrder,
+  });
+});

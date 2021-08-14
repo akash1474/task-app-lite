@@ -7,9 +7,7 @@ import morgan from 'morgan';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import compression from 'compression';
-import cookieParser from 'cookie-parser';
 import mongoSanitize from 'express-mongo-sanitize';
-import cookieSession from 'cookie-session';
 
 import AppError from './utils/appError.js';
 import globalErrorHandler from './controllers/errorController.js';
@@ -23,16 +21,9 @@ if (process.env.NODE_ENV === 'development') {
 
 dotenv.config({ path: './config.env' });
 
-app.use(
-    cookieSession({
-        maxAge: 30 * 24 * 60 * 60 * 1000,
-        keys: [process.env.KEY],
-    })
-);
 
 app.use(cors());
 app.use(helmet());
-app.use(cookieParser());
 app.use(xss());
 app.use(mongoSanitize());
 app.use(hpp());
